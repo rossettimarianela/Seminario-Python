@@ -1,7 +1,6 @@
 
 import random
 
-
 words = [
 "python",
 "programa",
@@ -13,11 +12,9 @@ words = [
 "lista",
 ]
 
-
 word = random.choice(words)
 guessed = []
 attempts = 6
-
 
 print("¡Bienvenido al Ahorcado!")
 print()
@@ -40,8 +37,12 @@ while attempts > 0:
     print(f"Intentos restantes: {attempts}")
     print(f"Letras usadas: {', '.join(guessed)}")
     
-    letter = input("Ingresá una letra: ")
-    if letter in guessed:
+    letter = input("Ingresá una letra: ").lower()
+
+    # Verifico si la letra es de 1 solo caracter y si es una letra
+    if len(letter) != 1 or letter not in "abcdefghijklmnopqrstuvwxyz":
+        print("Entrada no válida")
+    elif letter in guessed:
         print("Ya usaste esa letra.")
     elif letter in word:
         guessed.append(letter)
@@ -51,5 +52,12 @@ while attempts > 0:
         attempts -= 1
         print("Esa letra no está en la palabra.")
     print()
+
 else:
     print(f"¡Perdiste! La palabra era: {word}")
+
+
+'''El juego tiene un bug. Si el usuario ingresa más de una letra, un número o cualquier
+otro carácter inválido, el programa se comporta de manera inesperada.
+Modificalo para que en ese caso muestre el mensaje "Entrada no válida" y continúe el juego 
+en la siguiente iteración '''
